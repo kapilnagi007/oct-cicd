@@ -19,3 +19,24 @@ Docker tag CSTMIMAGENAME:VERSION USERNAME/CSTMIMAGENAME:VERSION
 
 **Upload image to the registry**
 Docker push USERNAME/CSTMIMAGENAME:VERSION 
+
+
+# Kubernetes
+
+**kubectl help
+This is just provide the list of all the commands.
+
+**kubectl apply -f deployment.yaml
+kubectl get deploy / kubectl get deployment
+
+**kubectl pods running
+kubectl get pods
+
+**kubectl delete pods
+kubectl delete pods podID
+
+**kubectl apply -f service.yaml
+kubectl get svc / kubectl get service
+
+**Zero downtime
+kubectl rollout command
