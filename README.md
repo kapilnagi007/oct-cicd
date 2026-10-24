@@ -23,20 +23,20 @@ Docker push USERNAME/CSTMIMAGENAME:VERSION
 
 # Kubernetes
 
-**kubectl help
+**kubectl help**
 This is just provide the list of all the commands.
 
-**kubectl apply -f deployment.yaml
+**kubectl apply -f deployment.yaml**
 kubectl get deploy / kubectl get deployment
 
-**kubectl pods running
+**kubectl pods running**
 kubectl get pods
 
-**kubectl delete pods
+**kubectl delete pods**
 kubectl delete pods podID
 
-**kubectl apply -f service.yaml
+**kubectl apply -f service.yaml**
 kubectl get svc / kubectl get service
 
-**Zero downtime
+**Zero downtime**
 kubectl rollout command
