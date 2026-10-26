@@ -17,8 +17,8 @@ spec:
         app: nginx
 
     spec:
-      container:
-        -name : nginx-deployment
-        image: kopilnagi/october-cstm-nginx:v1
-        ports:
-          -containerPorts: 80
+      containers:
+        - name : nginx-deployment
+          image: kopilnagi/october-cstm-nginx:v1
+          ports:
+          - containerPort: 80

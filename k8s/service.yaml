@@ -4,7 +4,7 @@ metadata:
   name: nginx-service
 spec:
   type: NodePort
-  selctor:
+  selector:
     app: nginx
 
   ports:
