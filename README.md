@@ -40,3 +40,29 @@ kubectl get svc / kubectl get service
 
 **Zero downtime:**
 kubectl rollout command
+
+
+# Terraform
+
+**Teraform init**
+Terraform initializing
+
+**Terraform init --reconfigure**
+Terraform initalizing reconfiguration
+
+**Terraform fmt**
+Formatting the terraform files
+
+**Terraform validate**
+Validating the terraform files
+
+**Terraform plan**
+it works like a blueprint of resources creation
+
+**Terraform apply**
+To execute the files for creating the resources
+
+**Terraform destroy**
+Delete the existing resources
+
+
