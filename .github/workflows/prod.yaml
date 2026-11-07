@@ -17,6 +17,19 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v7
 
+      - name: SonarQube Code Scanning
+        uses: sonarsource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      - name: SonarQube Quality Gate Check
+        uses: sonarsource/sonarqube-quality-gate-action@v1
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  
+
       - name: Setup Docker Build
         uses: docker/setup-buildx-action@v3
 
@@ -30,9 +43,24 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/boston-app:${{ github.sha }}
+
+      - name: Run Trivy vulnerability scanner on Image
+        uses: aquasecurity/trivy-action@v0.35.0
+        with:
+          image-ref: '${{ secrets.DOCKER_USERNAME }}/boston-app:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1' # Fails the pipeline step if matching bugs are found
+          ignore-unfixed: true # Ignores vulnerabilities that don't have a fix yet
+          severity: 'CRITICAL'
+
+      - name: Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/boston-app:latest
             ${{ secrets.DOCKER_USERNAME }}/boston-app:${{ github.sha }}
 
 
