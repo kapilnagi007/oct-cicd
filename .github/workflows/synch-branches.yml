@@ -1,0 +1,41 @@
+name: Sync branches
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  synch-branches:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup the Git identity
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Synch main to target branches
+        run: |
+          TARGET_BRANCHES="staging qa"
+
+          git fetch origin
+
+          for branch in $TARGET_BRANCHES; do
+            echo "---------------------------------"
+            echo "Synch main into target branches: $branch"
+            echo "---------------------------------"
+
+
+            git checkout "$branch" || git checkout -b "$branch" origin/"$branch"
+
+
+            git merge origin/main --no-edit
+
+            git push origin "$branch"
+          done
