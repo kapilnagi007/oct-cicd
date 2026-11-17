@@ -5,6 +5,9 @@ on:
     branches: 
       - main
 
+permissions:
+  content: write
+
 jobs:
   synch-branches:
     runs-on: ubuntu-latest
@@ -26,7 +29,7 @@ jobs:
 
           git fetch origin
 
-          for branch in $TARGET_BRANCHES; do
+          for branch in "$TARGET_BRANCHES"; do
             echo "---------------------------------"
             echo "Synch main into target branches: $branch"
             echo "---------------------------------"
@@ -38,4 +41,4 @@ jobs:
             git merge origin/main --no-edit
 
             git push origin "$branch"
-          done
+          done"
