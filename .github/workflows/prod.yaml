@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  docker-build:
+  CI:
     runs-on: ubuntu-latest
 
     steps:
@@ -64,5 +64,10 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/boston-app:${{ github.sha }}
+
+  CD:
+    runs-on: ubuntu-latest
+    steps:
+      - name: AWS Deploy
 
 

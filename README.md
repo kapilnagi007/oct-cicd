@@ -66,3 +66,6 @@ To execute the files for creating the resources
 Delete the existing resources
 
 
+# Git Synch
+**In this repo we are synch the branches using the workflows**
+we have total 3 branches whereas main is the primary and staging, qa are the secondary.
