@@ -25,21 +25,30 @@ jobs:
 
       - name: Synch main to target branches
         run: |
-          TARGET_BRANCHES="staging qa"
+          # TARGET_BRANCHES="staging qa"
 
-          git fetch origin
+          # git fetch origin
 
-          for branch in "$TARGET_BRANCHES"; do
-            echo "---------------------------------"
-            echo "Synch main into target branches: $branch"
-            echo "---------------------------------"
+          # for branch in "$TARGET_BRANCHES"; do
+          #   echo "---------------------------------"
+          #   echo "Synch main into target branches: $branch"
+          #   echo "---------------------------------"
 
+          #   git checkout "$branch" || git checkout -b "$branch" origin/"$branch"
 
-            git checkout "$branch" || git checkout -b "$branch" origin/"$branch"
+          #   git merge origin/main --no-edit
 
+          #   git push origin "$branch"
 
-            git merge origin/main --no-edit
+          # done
 
-            git push origin "$branch"
+          TARGET_BRANCHES=("staging" "qa")
 
+          for branch in "${TARGET_BRANCHES[@]}"; do
+
+            git fetch origin "$branch"
+          
+            git checkout -B "$branch" "origin/$branch"
+          
           done
+
